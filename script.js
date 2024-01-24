@@ -30,64 +30,71 @@ let headerRowWidth;
 function renderParcels() {
     const appContainer = document.getElementById('parcels');
     const selectedParcelValue = document.getElementById('selected-parcel-value');
+    const newParcelNameInput = document.getElementById('newParcelName');
+    const newParcelLocationSelect = document.getElementById('newParcellocation');
+
     selectedParcelValue.textContent = '';
     headerRow = document.querySelector('.header-row');
     headerRowWidth = window.innerWidth > 768 ? 1080 : 335; 
-    document.getElementById('newParcelName').value = '';
-    document.getElementById('newParcellocation').value = '';
 
     appContainer.innerHTML = '';
     selectedParcelValue.innerHTML = '';
     headerRow.innerHTML = '';
 
     uniquelocations.clear();
-    for (const parcel of data) {
+
+    data.forEach((parcel) => {
         if (!uniquelocations.has(parcel.location)) {
-            const currentHeader = document.createElement('div');
-            currentHeader.className = 'header-item';
-            currentHeader.textContent = parcel.location;
-            currentHeader.style.backgroundColor = getlocationColor(parcel.location);
-            currentHeader.style.color = '#1B1506';
-
-            headerRow.appendChild(currentHeader);
-
-            uniquelocations.add(parcel.location);
-            headerSizes[parcel.location] = 0;
+            createHeaderItem(parcel);
         }
 
         const headerItem = findHeaderItemByTextContent(headerRow, parcel.location);
         const parcelWidth = window.innerWidth > 768 ? 128 : 80;
         headerSizes[parcel.location] += parcelWidth;
 
-        const parcelElement = document.createElement('div');
-        parcelElement.className = 'parcel';
-        parcelElement.innerHTML = `
-            <div class="parcel-content" data-id="${parcel.id}" data-sequence="${parcel.sequence}" data-name="${parcel.name}" data-location="${parcel.location}" style="${parcel.selected ? 'border: 2px dashed green;' : 'border: 2px dashed transparent;'} width: ${parcelWidth}px; text-align: center;">
-                ${parcel.name}
-                <br>
-                <span class="sequence" style="background-color: ${getlocationColor(parcel.location)}; display: inline-block;">${parcel.sequence}</span>
-            </div>
-        `;
-
-        parcelElement.addEventListener('click', () => handleParcelClick(parcel));
+        const parcelElement = createParcelElement(parcel, parcelWidth);
         appContainer.appendChild(parcelElement);
-    }
+    });
 
-    // Set dynamic width for each header based on the collective size of visible parcels
-    uniquelocations.forEach(location => {
+    uniquelocations.forEach((location) => {
         const headerItem = findHeaderItemByTextContent(headerRow, location);
         const visibleParcels = getVisibleParcels(location);
         const visibleParcelsWidth = visibleParcels.reduce((totalWidth, parcel) => totalWidth + 132, 0);
-
-        // Calculate the percentage of the header-row width based on the visible parcels
         const percentageWidth = (visibleParcelsWidth / headerRowWidth) * 100;
 
         headerSizes[location] = percentageWidth;
         headerItem.style.width = `${headerSizes[location]}%`;
     });
 
-    document.getElementById('newParcelName').value = '';
-    document.getElementById('newParcellocation').value = '';
+    newParcelNameInput.value = '';
+    newParcelLocationSelect.value = '';
+}
+
+function createHeaderItem(parcel) {
+    const currentHeader = document.createElement('div');
+    currentHeader.className = 'header-item';
+    currentHeader.textContent = parcel.location;
+    currentHeader.style.backgroundColor = getlocationColor(parcel.location);
+    currentHeader.style.color = '#1B1506';
+
+    headerRow.appendChild(currentHeader);
+
+    uniquelocations.add(parcel.location);
+    headerSizes[parcel.location] = 0;
+}
+
+function createParcelElement(parcel, parcelWidth) {
+    const parcelElement = document.createElement('div');
+    parcelElement.className = 'parcel';
+    parcelElement.innerHTML = `
+        <div class="parcel-content" data-id="${parcel.id}" data-sequence="${parcel.sequence}" data-name="${parcel.name}" data-location="${parcel.location}" style="${parcel.selected ? 'border: 2px dashed green;' : 'border: 2px dashed transparent;'} width: ${parcelWidth}px; text-align: center;">
+            ${parcel.name}<br>
+            <span class="sequence" style="background-color: ${getlocationColor(parcel.location)}; display: inline-block;">${parcel.sequence}</span>
+        </div>
+    `;
+
+    parcelElement.addEventListener('click', () => handleParcelClick(parcel));
+    return parcelElement;
 }
 
 // Function to find header item by text content (alternative to :contains)
@@ -120,12 +127,11 @@ function isElementInViewport(el) {
 
 // Update header-item widths on scroll
 window.addEventListener('scroll', () => {
-    uniquelocations.forEach(location => {
+    uniquelocations.forEach((location) => {
         const headerItem = findHeaderItemByTextContent(headerRow, location);
         if (headerItem) {
             const visibleParcels = getVisibleParcels(location);
             const visibleParcelsWidth = visibleParcels.reduce((totalWidth, parcel) => totalWidth + 132, 0);
-
             const percentageWidth = (visibleParcelsWidth / headerRowWidth) * 100;
 
             headerSizes[location] = percentageWidth;
