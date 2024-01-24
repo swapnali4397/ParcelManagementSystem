@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parcel Management System</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Make sure to link the CSS file here -->
+</head>
+<body>
+    <div id="app">
+        <div class="header-row">
+        </div>
+        <div class="parcels-row" id="parcels">
+            <!-- Parcel elements will be dynamically generated here -->
+        </div>
+        <div id="selected-parcel">
+            Selected Parcel :  
+            <span id="selected-parcel-value"></span>
+        </div>
+        <div class="content-container">
+            <div class="input-section">
+                <div class="input-box">
+                <div class="input-devision">
+                    <label for="newParcelName">Enter Name:</label>
+                    <input type="text" id="newParcelName">
+                </div>
+                <div class="input-devision">
+                    <label for="newParcellocation">Select Location Group:</label>
+                    <select id="newParcellocation">
+                        <option value="Mumbai" style="background-color: #F0155E; color: #1B1506;">Mumbai</option>
+                        <option value="Delhi" style="background-color: #F1C233; color: #1B1506;">Delhi</option>
+                        <option value="Kolkata" style="background-color: #3C78D8; color: #1B1506;">Kolkata</option>
+                    </select>
+                </div>
+            </div>
+            </div>
+            <div class="color-guid">
+                <div class="color-legend">
+                    <div class="color-label">Mumbai</div>
+                    <div class="color-square" style="background-color: #F0155E;"></div>        
+                </div>
+                <div class="color-legend">
+                    <div class="color-label">Kolkata</div>
+                    <div class="color-square" style="background-color: #3C78D8;"></div>  
+                </div>
+                <div class="color-legend">
+                    <div class="color-label">Delhi</div>
+                    <div class="color-square" style="background-color: #F1C233;"></div>
+                </div>
+            </div>
+        </div>
+        
+       
+        <div class="actions-row">
+            <button onclick="addParcelAfterAction()">Add After</button>
+            <button onclick="addParcelBeforeAction()">Add Before</button>
+            <button onclick="replaceParcelAction()">Replace</button>
+            <button onclick="deleteParcelAction()">Delete</button>
+            <button onclick="refreshParcels()">Refresh</button>
+            <button onclick="showFinalData()">Show Final</button>
+        </div>
+    </div>
+    <script src="script.js"></script> <!-- Make sure to link the JavaScript file here -->
+</body>
+</html>

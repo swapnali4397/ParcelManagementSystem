@@ -1,0 +1,224 @@
+/* For WebKit browsers */
+::-webkit-scrollbar {
+    height: 8px;
+    border: 1px solid #87CEEB;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #87CEEB; 
+    border-radius: 4px;
+  }
+  
+body {
+    font-family: "Google Sans", Roboto, Arial, sans-serif;
+    background-color: #2A2828;
+    margin: 0;
+    padding: 0;
+}
+
+#app {
+    padding: 20px 80px;
+    margin: 20px auto;
+}
+
+.header-row {
+    display: flex;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.header-item {
+    padding: 6px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.content-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    max-width: 100%;
+}
+
+.input-section {
+    border: 2px solid lightblue;
+    padding: 50px 40px;
+    width: 50%;
+}
+
+.input-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.input-devision {
+    display: flex;
+}
+
+.input-devision:first-child {
+    margin-bottom: 40px;
+}
+
+.input-devision label {
+    display: inline-block;
+    width: 40%;
+    font-size: 16px;
+    white-space: nowrap;
+    margin-right: 20px;
+    color: #F0F0F0;
+}
+
+.input-devision input,
+.input-devision select {
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-end;
+    padding: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+    border: 1px solid lightblue;
+}
+
+.color-guid {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.color-legend {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.color-square {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+}
+
+.color-label {
+    display: inline-block;
+    color: #F0F0F0;
+    width: 10%;
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+.parcels-row {
+    display: flex;
+    overflow-x: auto;
+    margin-top: 48px;
+    padding-bottom: 20px;
+}
+
+.parcel {
+    cursor: pointer;
+}
+
+.sequence {
+    color: #1B1506;
+    width: 100%;
+    margin-top: 8px;
+    padding: 6px 0;
+}
+
+.parcel-content {
+    color: #F0F0F0;
+}
+
+.parcel-content.selected {
+    border: 2px dashed green !important;
+}
+
+#selected-parcel {
+    font-size: 1.1rem;
+    margin: 40px 0;
+    color: #F0F0F0;
+}
+
+#selected-parcel-value {
+    color: #3be8e9;
+    font-size: 20px;
+}
+
+.actions-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+
+.actions-row button {
+   
+    padding: 10px 15px;
+    background-color: #B6D7A8;
+    color: #535751;
+    border: none;
+    cursor: pointer;
+}
+
+.actions-row button:hover {
+    background-color: #B6D7F9;
+}
+
+@media screen and (max-width: 768px) {
+    #app {
+        padding: 20px;
+        margin: 20px auto;
+    }
+
+    .content-container {
+        flex-direction: column;
+    }
+
+    .input-section {
+        padding: 24px 15px;
+        width: 90%;
+    }
+
+    .input-devision {
+        flex-direction: column;
+        width: 100%;
+    }
+    .input-devision label, .input-devision input,  .input-devision select {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .input-devision label {
+        margin-bottom: 5px;
+    }
+
+    .color-guid {
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .color-legend {
+        display: flex;
+        justify-content: center;
+    }
+
+    .color-label {
+        width: 24%;
+    }
+
+    .actions-row {
+        flex-direction: column;
+    }
+
+    .actions-row button {
+        margin-top: 20px;
+    }
+
+}
